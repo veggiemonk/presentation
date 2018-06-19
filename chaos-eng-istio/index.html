@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/moon.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+  <!-- <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background-transition='zoom' data-transition='concave' data-state='blackout'>
+        <h1>CHAOS ENGINEERING</h1>
+        <h2>with</h2>
+        <h1>SERVICE MESH</h1>
+        </section>
+        <section>
+        <h2>6 Questions to the audience</h2>
+        <ol>
+          <li>Who uses containers ?</li>
+          <li>Who uses an orchestrator such as kubernetes ?</li>
+          <li>Who knows what is a service mesh ?</li>
+          <li>Who knows what is a SLI, SLO, SLA ?</li>
+          <li>Who knows what is Chaos Engineering ?</li>
+          <li>Who already did Chaos Engineering ?</li>
+        </ol>
+        </section>
+        <section data-background-transition='zoom' data-transition='linear' id='outline'>
+        <h2>Plan</h2>
+        <ol>
+          <li>Kunernetes networking model</li>
+          <li>Service mesh: pros & cons</li>
+          <li>Demo of Istio</li>
+          <li>Chaos Engineering: concepts & origin</li>
+          <li>Demo of fault-injection</li>
+          <li>Q&A</li>
+        </ol>
+        </section>
+        <section data-transition='concave' id="kubernetes">
+        <h2>Kubernetes networking model</h2>
+        <div class="fragment">
+          <p>
+            1.
+            all containers &#8594; all other containers
+            <strong>without NAT</strong>
+          </p>
+          <p>
+            2.
+            all nodes &#8594; all containers
+            <br/>
+            all nodes &#8592; all containers
+            <br/>
+            <strong>without NAT</strong>
+          </p>
+          <p>
+            3. the IP that a container sees itself as
+            <br/>
+            <strong>is the SAME</strong>
+            <br/>
+            IP that others see it as
+          </p>
+        </div>
+        <br/>
+        <span class="fragment">
+          <a href="https://vimeo.com/245778144/4d1d597c5e">VIDEO: Kubernetes Deconstructed</a>
+        </span>
+        </section>
+
+        <section data-transition='concave'>
+        <h4>What is a service mesh</h4>
+        <h3>What problems does it solve</h3>
+        <br/>
+        <h2 class="fragment">Communication between services</h2>
+        <br/>
+        <br/>
+        <span class="fragment">Other resources :
+          <br/>
+          <a href="https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/">What's a service mesh and why do I need one</a>
+        </span>
+        <aside class="notes">operating large production systems at companies like Twitter, Yahoo, Google and Microsoft. In our experience, the
+          source of the most complex, surprising, and emergent behavior was usually not the services themselves, but the
+          communication between services</aside>
+        </section>
+        <section>
+          <section id="arch">
+          <h4>How does it solve inter service communication</h4>
+          <img src="https://istio.io/docs/concepts/what-is-istio/img/overview/arch.svg" />
+          </section>
+          <section id="setup">
+            <pre><code contenteditable>
+helm install install/kubernetes/helm/istio \
+  --name istio --namespace istio-system --set global.tag=0.8.0 \
+  --set sidecarInjectorWebhook.enabled=true \
+  --set prometheus.enabled=true --set grafana.enabled=true \
+  --set servicegraph.enabled=true --set tracing.enabled=true \
+  --set kiali.enabled=true;
+            </code></pre>
+            <br/>
+            <a href="https://github.com/istio/istio/blob/master/install/kubernetes/helm/istio/README.md#configuration">config</a>
+          </section>
+        </section>
+        <section data-transition='concave' id="service-mesh">
+        <h2>Features</h2>
+        <ul>
+          <li>Traffic management</li>
+          <li>Resiliency</li>
+          <li>Security</li>
+          <li>Observability</li>
+        </ul>
+        </section>
+        <section>
+        <h4>Service discovery</h4>
+        <pre><code>
+        reviews = {
+          "name" : "http://reviews:9080",
+          "endpoint" : "reviews",
+          "children" : [ratings]
+        }
+
+        productpage = {
+          "name" : "http://productpage:9080",
+          "endpoint" : "details",
+          "children" : [details, reviews]
+        }
+          </code></pre>
+        <a href="https://github.com/istio/istio/blob/master/samples/bookinfo/src/productpage/productpage.py">source code</a>
+        </section>
+        <section data-transition='concave' id="routing">
+        <h4>Traffic Management</h4>
+        <pre><code contenteditable>
+        apiVersion: networking.istio.io/v1alpha3
+        kind: VirtualService
+        metadata:
+          name: reviews
+          ...
+        spec:
+          hosts:
+          - reviews
+          http:
+          - match:
+            - headers:
+                cookie:
+                  regex: ^(.*?;)?(user=jason)(;.*)?$
+            route:
+            - destination:
+                host: reviews
+                subset: v2
+          - route:
+            - destination:
+                host: reviews
+                subset: v1
+           </code></pre>
+        <aside class="notes"> Load balancing,
+          traffic shaping (canary), traffic mirroring,
+          service discovery, ingress, egress
+          (hit 's' on your keyboard).</aside>
+
+        </section>
+        <section data-transition='concave' id="resiliency">
+        <h4>Resiliency</h4>
+        <pre><code contenteditable>
+        apiVersion: networking.istio.io/v1alpha3
+        kind: VirtualService
+        metadata:
+          name: reviews
+        spec:
+          hosts:
+          - reviews
+          http:
+          - route:
+            - destination:
+                host: reviews
+                subset: v2
+              retries:
+                attempts: 3
+                perTryTimeout: 2s
+            timeout: 10s
+              </code></pre>
+        <aside class="notes"> Timeouts, retries, circuit breaker, rate limiting, delay and fault injection (hit 's' on your keyboard).</aside>
+        </section>
+        <section id="Security">
+        <h2>Security</h2>
+        <ul>
+          <li>namespace-level and service-level policies</li>
+          <li>mutual TLS Authentication</li>
+          <li>role-based access control (RBAC)</li>
+        </ul>
+        </section>
+        <section>
+        <h2>Observability</h2>
+        <ul>
+          <li>Metrics</li>
+          <li>Logs</li>
+          <li>Tracing</li>
+        </ul>
+        </section>
+        <section>
+        <h1>DEMO</h1>
+        <img
+        style="background-color: white;"
+        src="https://istio.io/docs/guides/img/bookinfo/withistio.svg"
+        alt="Bookinfo app"/>
+        </section>
+        <section>
+        <h1>CHAOS ENGINEERING</h1>
+        </section>
+        <section>
+        <blockquote>“Chaos Engineering is the discipline of experimenting on a distributed system in order to build confidence in the
+          system’s capability to withstand turbulent conditions in production.”
+        </blockquote>
+        <a href="https://principlesofchaos.org/">principlesofchaos.org</a>
+        </section>
+        <section>
+        <p>Be carefull of the word: "EXPERIMENTING"!</p>
+
+        <img src="https://media.science360.gov/files/story/cbb08900-d237-40a5-be17-307532b53688-largeImage.jpg" width="350px" />
+
+        <p>It's a scientific experiment designed to verify an hypothesis.</p>
+        </section>
+        <section>
+        <h2>Site Reliability Engineering</h2>
+        <ul>
+          <li>Identify weaknesses</li>
+          <li>Improve resiliency</li>
+          <li>
+            <a href="https://landing.google.com/sre/book/chapters/service-level-objectives.html">SLI, SLO, SLA</a>
+          </li>
+        </ul>
+        </section>
+        <section>
+        <h2>Type of errors</h2>
+        <ul>
+          <li>Unreachable</li>
+          <li>Delays</li>
+          <li>Timeout cascading</li>
+          <li>Circuit breaker</li>
+        </ul>
+        </section>
+        <section>
+        <h1>DEMO</h1>
+        <img
+        style="background-color: white;"
+        src="https://istio.io/docs/guides/img/bookinfo/withistio.svg"
+        alt="Bookinfo app"/>
+        </section>
+        <section>
+        <h2>THANK YOU</h2>
+        <h3>Julien Bisconti</h3>
+        <p>
+            <small>
+              <a style='font-weight:bold;color:deepskyblue;' href='http://github.com/veggiemonk'>Github: @veggiemonk</a>
+              <br/>
+              <a style='font-weight:bold;color:deepskyblue;' href='https://twitter.com/veggiemonk'>Twitter: @veggiemonk</a>
+              <br/>
+              <a style='font-weight:bold;color:deepskyblue;' href='https://www.linkedin.com/in/julienbisconti/'>LinkedIn: julienbisconti</a>
+            </small>
+          </p>
+        <br/>
+        <h4>Revaljs by Hakim El Hattab / hakim.se</h4>
+        <h4>
+          <a href="http://gist-reveal.it">gist-reveal</a> by
+          <a href="http://twitter.com/ryanj/">ryanj</a> and
+          <a href="https://github.com/fkautz">fkautz</a>
+        </h4>
+        </section>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
