@@ -1,0 +1,493 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/moon.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+  <!-- <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+<section data-transition='concave' data-state='blackout'>
+<h1>Monorepo</h1>
+<h4>vs</h4>
+<h1>Many repos</h1>
+</section>
+
+<!-- <section>
+  <h3>Who am I</h3>
+  <p>Software engineer / DevOps </p>
+  <div>
+    <h4>Worked at</h4>
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+      <div>
+        <svg height="100" viewBox="0 0 275 100" width="275" xmlns="http://www.w3.org/2000/svg"><path d="m82.775 79.842-17.875-30.067 17.875-30.067 8.617 30.067zm-39.783-2.934-22.459-22.275h35.75l17.875 30.067zm0-54.358 31.075-7.792-17.875 30.067h-35.75zm45.65-22.55-40.609 10.542-6.05 10.358-12.191-.092-29.792 28.967 29.792 28.967 12.191-.092 6.05 10.358 40.609 10.634 10.908-39.509-6.142-10.266 6.142-10.267zm92.216 29.242c-5.408 0-9.075 2.291-11.825 6.508h-.183v-5.408h-9.533v39.783h9.716v-22.55c0-5.408 3.392-9.167 8.067-9.167 4.4 0 7.7 2.659 7.7 7.334v24.475h9.717v-26.034c.091-8.708-5.409-14.941-13.659-14.941zm-36.3 24.108c0 5.317-3.025 8.983-7.975 8.983-4.491 0-7.333-2.566-7.333-7.241v-24.75h-9.717v26.583c0 8.708 4.95 14.392 13.842 14.392 5.592 0 8.708-2.109 11.367-5.775h.275v4.675h9.35v-39.875h-9.717v23.008zm55.184-23.008h9.716v39.783h-9.716zm0-12.375h9.716v7.975h-9.716zm64.808 12.375-5.775 17.966c-1.283 3.667-2.292 8.709-2.292 8.709h-.275s-1.283-5.042-2.566-8.709l-6.509-17.966h-10.45l10.725 28.325c2.292 6.05 3.025 8.616 3.025 10.816 0 3.3-1.741 5.409-5.866 5.409h-3.759v8.341h6.234c8.066 0 10.908-3.208 13.933-12.008l14.025-40.792h-10.45zm-36.942 28.141v-21.083h6.234v-6.967h-6.234v-12.466h-9.716v12.375h-5.5v6.966h5.5v23.375c0 7.517 5.683 9.534 10.816 9.534 4.217 0 5.317-.184 5.317-.184v-7.7h-2.475c-2.292.092-3.942-.916-3.942-3.85z" fill="#fff"/></svg>
+      </div>
+        <div>
+          <img src="https://corporate.discovery.com/wp-content/themes/discovery-corporate/images/discovery-logo-explore-flat-2018.png" alt="Discovery Logo">
+        </div>
+    </div>
+  </div>
+  <h4>contact</h4>
+  <p>
+      <small>
+        <a style='font-weight:bold;color:deepskyblue;' href='http://github.com/veggiemonk'>Github: @veggiemonk</a>
+        <br/>
+        <a style='font-weight:bold;color:deepskyblue;' href='https://twitter.com/veggiemonk'>Twitter: @veggiemonk</a>
+        <br/>
+        <a style='font-weight:bold;color:deepskyblue;' href='https://www.linkedin.com/in/julienbisconti/'>LinkedIn: julienbisconti</a>
+        <br />
+        <a style='font-weight:bold;color:deepskyblue;' href="https://veggiemonk.github.io/">blog: https://veggiemonk.github.io/</a>
+      </small>
+    </p>
+</section> -->
+
+<section id='outline'>
+  <h4>A.K.A.</h4>
+  <h2>Tradeoffs and tooling of having all the code base in one place </h2>
+  <h2>or many places</h2>
+</section>
+
+<section data-transition='concave' id="inquiry">
+  <h2>Questions to the audience</h2>
+  <ul>
+    <li>What is a good size for a pull request ?</li>
+    <li>When is a good time to review a pull request ?</li>
+    <li>Where is a good place to put the documentation ?</li>
+    <li>How do you know how to build and run a project ?</li>
+  </ul>
+</section>
+<section>
+    <img style="height:100%;" src="https://i.imgflip.com/2hrq4d.jpg" title="made at imgflip.com"/>
+</section>
+<section>
+  <h2>Monorepo</h2>
+    <ul>
+      <li>Monolith repository ≠ tightly coupled code </li>
+      <li>It’s about the development workflow </li>
+      <li>And sharing your work with colleagues </li>
+      <li>Many languages in same repo</li>
+      <li>Assets, doc, config, style guide, scripts,… </li>
+      <li>Organizational change rather than technical</li>
+    </ul>
+
+</section>
+<section>
+  <h3>8 fallacies of distributed computing</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; font-size: smaller">
+  <ol>
+      <li>The network is reliable.</li>
+      <li>Latency is zero.</li>
+      <li>Bandwidth is infinite.</li>
+      <li>The network is secure.</li>
+  </ol>
+  <ol start="5">
+      <li>Topology doesn't change.</li>
+      <li>There is one administrator.</li>
+      <li>Transport cost is zero.</li>
+      <li>The network is homogeneous.</li>
+  </ol>
+  </div>
+  <br />
+
+  <span class="fragment">
+    <a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">source (wikipedia)</a>
+    <br />
+    <a href="https://tools.ietf.org/html/rfc1925">RFC 1925 - 22 years old and still pertinent</a>
+  </span>
+</section>
+<section>
+  <p>using a library, framework or service for:</p>
+  <ul>
+      <li>circuit breaking</li>
+      <li>timeouts</li>
+      <li>retries</li>
+      <li>service discovery</li>
+      <li>client-side loadbalancing</li>
+      <li>metrics</li>
+      <li>traffic shaping</li>
+      <li>rate limiting</li>
+      <li>...</li>
+  </ul>
+  <strong style="text-align: right;">
+    <p class="fragment">for which languages?</p>
+  </strong>
+</section>
+
+<section>
+    <h3>drawbacks</h3>
+    <ul>
+        <li>combination language/framework/version/feature</li>
+        <li>maintain, upgrade, migrate, retire</li>
+        <li>code pollution and complexity (+ testing)</li>
+        <li>deployment</li>
+        <li>language/framework/version lock-in</li>
+        <li>debugging</li>
+    </ul>
+</section>
+<!--
+  *******************************************************************************************
+-->
+<section data-transition='concave'>
+  <h4>What is a service mesh</h4>
+  <h3>What problems does it solve</h3>
+  <br/>
+  <h2 class="fragment">Communication between services</h2>
+  <br/>
+  <p class="fragment" style="font-style: italic">A network for services, not bytes</p>
+</section>
+
+<section id="arch">
+  <h4>How does it solve inter service communication</h4>
+  <img style="height: 60vh;filter: invert(.9) brightness(1.4);"
+  alt="The overall architecture of an Istio-based application."
+  src="https://istio.io/docs/concepts/what-is-istio/arch.svg" title="Istio Architecture">
+</section>
+
+<section id="osi-layers">
+    <img style="filter: invert(.9) brightness(1.4);" height="521" width="1024"
+    src="https://f5.com/Portals/1/Users/038/38/38/the_new_new_osi_stack.jpg?ver=2017-10-03-080252-023" >
+    <a href="https://f5.com/about-us/blog/articles/the-new-osi-network-stack-containers-and-half-layers-28124">source</a>
+</section>
+
+<section>
+  <h4>What's in the code</h4>
+  <pre><code class="python hljs" style="word-wrap: break-word;" data-trim>
+servicesDomain = "" if (os.environ.get("SERVICES_DOMAIN") == None) else "." + os.environ.get("SERVICES_DOMAIN")
+details = {
+    "name" : "http://details{0}:9080".format(servicesDomain),
+    "endpoint" : "details",
+    "children" : []
+}
+ratings = {
+    "name" : "http://ratings{0}:9080".format(servicesDomain),
+    "endpoint" : "ratings",
+    "children" : []
+}
+  </code></pre>
+  <a href="https://github.com/istio/istio/blob/master/samples/bookinfo/src/productpage/productpage.py#L53">source code</a>
+</section>
+
+<section data-transition='concave' id="routing">
+  <h4>Traffic Management</h4>
+  <pre>
+    <code class="yaml hljs" style="word-wrap: break-word;" data-trim>
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+  ...
+spec:
+  hosts:
+  - reviews
+  http:
+  - match:
+    - headers:
+        end-user:
+          exact: jason
+    route:
+    - destination:
+        host: reviews
+        subset: v2
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+</code></pre>
+</section>
+
+<section data-transition='concave' id="resiliency">
+  <h4>Resiliency</h4>
+  <pre><code class="yaml hljs" style="word-wrap: break-word;" data-trim>
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v2
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+      </code></pre>
+</section>
+
+<section id="Security">
+  <h2>Security</h2>
+  <ul>
+    <li>namespace-level and service-level policies</li>
+    <li>mutual TLS Authentication</li>
+    <li>role-based access control (RBAC)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Observability</h2>
+  <ul>
+    <li>Metrics (prometheus)</li>
+    <li>Logs (fluentd)</li>
+    <li>Tracing (jaeger)</li>
+    <li><a href="http://localhost:20001">Cluster traffic (kiali)</a></li>
+  </ul>
+</section>
+
+<section>
+  <h1>DEMO</h1>
+  <img style="filter: invert(.9) brightness(1.4);"
+  src="https://istio.io/docs/examples/bookinfo/withistio.svg"
+  alt="Bookinfo Application without Istio" title="Bookinfo Application without Istio">
+</section>
+<section>
+  <h2>QUESTIONS about service mesh</h2>
+  <p>List of service meshes</p>
+  <ul>
+    <li><a href="https://github.com/istio/istio">Istio</a></li>
+    <li><a href="https://github.com/envoyproxy/envoy">Envoy</a></li>
+    <li><a href="https://github.com/linkerd/linkerd2">Conduit/Linkerd2</a></li>
+    <li><a href="https://github.com/linkerd/linkerd">Linkerd</a></li>
+    <li><a href="https://github.com/hashicorp/consul">Consul</a></li>
+    <li><a href="https://github.com/weaveworks/mesh">Weave mesh</a></li>
+  </ul>
+  <p><a href="https://www.consul.io/intro/vs/istio.html">Comparison: Consult vs Istio</a></p>
+</section>
+<!--
+  *******************************************************************************************
+-->
+<section>
+  <h1>CHAOS ENGINEERING</h1>
+</section>
+
+<section>
+  <blockquote>
+    <p lang="en" dir="ltr">Chaos Engineering is the discipline of experimenting on a distributed system in order to build confidence
+    in the system’s capability to withstand turbulent conditions in production.</p>
+    &mdash; <a href="https://principlesofchaos.org/">principlesofchaos.org</a>
+  </blockquote>
+</section>
+
+<section>
+  <blockquote>
+    <p>Thoughtful, planned experiments designed to reveal the weakness in our systems. </p>
+    &mdash; <a href="https://www.gremlin.com/">Kolton Andrus (cofounder and CEO of Gremlin Inc.)</a>
+  </blockquote>
+  <img src="https://media.science360.gov/files/story/cbb08900-d237-40a5-be17-307532b53688-largeImage.jpg" width="350px" />
+</section>
+
+<section>
+  <blockquote>
+    <p lang="en" dir="ltr">Chaos Engineering isn't done to cause problems; it is done to reveal them.</p>
+    &mdash; <a href="https://twitter.com/allspaw/status/1030226933248798720">Nora Jones (Netflix)</a>
+  </blockquote>
+</section>
+
+<section>
+  <blockquote>
+    <p lang="en" dir="ltr">Chaos Engineering is exploratory testing of non-functional requirements
+        where ‘non-functional requirements’ are the requirements that if not met render a service non-functional.
+    </p>
+    &mdash; <a href="https://twitter.com/littleidea/status/1030304684991369216">@littleidea</a>
+  </blockquote>
+</section>
+
+<section>
+    <blockquote class="twitter-tweet" data-lang="en">
+      <p lang="en" dir="ltr">Having a child: Chaos Engineering for everything in your life.</p>
+      &mdash; <a href="https://twitter.com/icecrime/status/963115377562669057?ref_src=twsrc%5Etfw">@icecrime</a>
+    </blockquote>
+</section>
+
+<section>
+  <h4>What Chaos Engineering is not</h4>
+  <img src="https://randomoverload.org/wp-content/uploads/2015/10/1abaS6RB77Z.jpg" alt="pray to server">
+</section>
+
+<section>
+  <h1>Hope is not a strategy</h1>
+</section>
+
+<section>
+  <h2>Usually untested</h2>
+  <ol>
+    <li>Graceful shutdown</li>
+    <li>Health check</li>
+    <li>Cascading timeouts</li>
+    <li>Deployments (smoke test)</li>
+    <li>...</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Type of errors</h2>
+  <ul>
+    <li>Unreachable</li>
+    <li>Delays</li>
+    <li>Timeout cascading</li>
+    <li>Circuit breaker</li>
+    <li>Migration</li>
+    <li>...</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Site Reliability Engineering</h2>
+  <ul>
+    <li>Identify weaknesses</li>
+    <li>Improve resiliency</li>
+    <li>
+      <a href="https://landing.google.com/sre/book/chapters/service-level-objectives.html">SLI, SLO, SLA</a>
+      <!--
+        These measurements describe basic properties of metrics that matter,
+        what values we want those metrics to have,
+        and how we’ll react if we can’t provide the expected service -->
+    </li>
+  </ul>
+</section>
+<section>
+  <h2>Gameday</h2>
+  <p>What happens when ________ ? [fill in the blank]</p>
+  <p>example: <a href="https://www.gremlin.com/community/tutorials/gremlin-gameday-breaking-dynamodb/">Breaking DynamoDB</a></p>
+</section>
+<section>
+  <h2>Organization failures</h2>
+  <h4>Expect failure and learn from it</h4>
+  <ul>
+    <li>High Severity Incident Management Program</li>
+    <li>Who should be updated and when</li>
+    <li>Practice: It's a cultural approach to failure</li>
+    <li>Publish reports (RCA) and results</li>
+  </ul>
+  <p><a href="https://www.gremlin.com/community/tutorials/how-to-establish-a-high-severity-incident-management-program/">source</a></p>
+</section>
+
+<section>
+  <h2>Kaizen (改善)</h2>
+  <p> kai-zen = change-good</p>
+  <img src="https://image.slidesharecdn.com/om-150830140656-lva1-app6892/95/the-toyota-way-toyota-production-system-operations-management-27-638.jpg" alt="Toyota andon cord">
+
+  <p>
+     <a href="https://web.archive.org/web/20131029204446/http://www.kaizen.com/about-us/definition-of-kaizen.html">definition</a>
+  </p>
+
+</section>
+
+<section>
+  <h2>Word of caution</h2>
+  <p>
+    <i>"Chaos"</i>: sounds cool and fun for you.
+    <br>
+    <i>"Resiliency"</i>: sounds great for your manager and the system.
+  </p>
+  <p>
+    <br>
+    Article: <a href="https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/">Would a Chaos by any other Name</a>
+  </p>
+  <p>Book: <a href="https://www.amazon.co.uk/Resilience-Engineering-Practice-Guidebook-Ashgate/dp/1472420748/ref=sr_1_2">Resilience Engineering in Practice</a></p>
+</section>
+
+<section>
+  <h2>How to start Chaos Engineering</h2>
+  <ol>
+    <li>Don't mention Chaos (personal opinion)</li>
+    <li>Set up monitoring !!!</li>
+    <li>Identify a measurable output for "steady state"</li>
+    <li>Form a hypothesis</li>
+    <li>Simulate real-world events</li>
+    <li>Disprove your hypothesis</li>
+    <li>Write a report with findings and mesurements</li>
+    <li>Talk about "Chaos"</li>
+    <li>Practice and improve</li>
+  </ol>
+</section>
+
+<section>
+  <h1>DEMO</h1>
+  <img style="filter: invert(.9) brightness(1.2);" height="300px" src="https://istio.io/docs/examples/bookinfo/withistio.svg" alt="Bookinfo Application without Istio" title="Bookinfo Application without Istio">
+  <p>Inject delay in user Jason's requests</p>
+
+</section>
+
+<section id="resources">
+  <h2>Resources</h2>
+  <small>
+  <ul>
+    <li><a href="https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/">What's a service mesh</a></li>
+    <li><a href="https://landing.google.com/sre/book/index.html">SRE book</a></li>
+    <li><a href="https://www.youtube.com/watch?v=tEylFyxbDLE">SLI, SLO, SLA</a> </li>
+    <li><a href="https://www.microservices.com/talks/lyfts-envoy-monolith-service-mesh-matt-klein/">[Talk] Lyft's envoy</a></li>
+    <li><a href="https://blog.sebastian-daschner.com/entries/istio-networking-api-explained">Istio Networking Api explained (Video)</a></li>
+    <li><a href="https://www.gremlin.com/blog/">Gremlin Blog</a></li>
+    <li><a href="https://www.techrepublic.com/article/chaos-engineering-a-cheat-sheet/">Chaos Engineering Cheat sheet</a></li>
+    <li><a href="https://www.infoq.com/presentations/chaos-engineering-resilient-systems">[Talk] Chaos Engineering: Why the World Needs More Resilient Systems</a></li>
+    <li><a href="https://www.oreilly.com/webops-perf/free/chaos-engineering.csp">Chaos Engineering Book</a></li>
+    <li><a href="https://www.gremlin.com/community/tutorials/chaos-engineering-the-history-principles-and-practice/">Chaos Engineering: the history, principles, and practice</a></li>
+    <li><a href="https://github.com/dastergon/awesome-chaos-engineering">⭐️ Awesome Chaos Engineering</a></li>
+    <li><a href="https://www.infoq.com/presentations/adopt-chaos-engineering">[Talk] Choose Your Own Adventure: Chaos Engineering</a></li>
+    <li><a href="https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/">Would a Chaos by any other Name</a></li>
+  </ul>
+  </small>
+</section>
+<section>
+  <h2>THANK YOU</h2>
+  <p>
+    <small>
+      <a style='font-weight:bold;color:deepskyblue;' href='http://github.com/veggiemonk'>Github: @veggiemonk</a>
+      <br/>
+      <a style='font-weight:bold;color:deepskyblue;' href='https://twitter.com/veggiemonk'>Twitter: @veggiemonk</a>
+      <br/>
+      <a style='font-weight:bold;color:deepskyblue;' href='https://www.linkedin.com/in/julienbisconti/'>LinkedIn: julienbisconti</a>
+      <br />
+      <a style='font-weight:bold;color:deepskyblue;' href="https://veggiemonk.github.io/">blog: https://veggiemonk.github.io/</a>
+      <br />
+      <a style='font-weight:bold;color:deepskyblue;' href="https://www.slideshare.net/julienbisconti">slides: https://www.slideshare.net/julienbisconti</a>
+    </small>
+  </p>
+  <br/>
+  <h4>Slides made with Revaljs</h4>
+</section>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      history: true,
+      dependencies: [
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
