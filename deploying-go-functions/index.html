@@ -34,9 +34,7 @@
   </p>
 </section> -->
 <section data-transition='concave' data-state='blackout'>
-<h1>CHAOS ENGINEERING</h1>
-<h2>with</h2>
-<h1>SERVICE MESH</h1>
+<h1>DEPLOYING GO FUNCTIONS</h1>
 </section>
 
 <section>
@@ -67,7 +65,7 @@
     </p>
 </section>
 
-<section id='outline'>
+<!-- <section id='outline'>
 <h2>Outline</h2>
 <ol>
   <li>Genesis</li>
@@ -77,45 +75,75 @@
   <li>Demo of fault-injection</li>
   <li>Q&A</li>
 </ol>
-</section>
-<section>
-  <h4>at the beginning there was an</h4>
-  <h2>APP</h2>
-  <p class="fragment">and the app was code</p>
-  <p class="fragment">that needed to scale</p>
-</section>
-<!-- <section>
-  <p>using a library, framework or service for:</p>
-  <ul>
-      <li>circuit breaking</li>
-      <li>timeouts</li>
-      <li>retries</li>
-      <li>service discovery</li>
-      <li>client-side loadbalancing</li>
-      <li>metrics</li>
-      <li>traffic shaping</li>
-      <li>rate limiting</li>
-      <li>...</li>
-  </ul>
-  <strong style="text-align: right;">
-    <p class="fragment">for which languages?</p>
-  </strong>
 </section> -->
-
 <section>
-  <h2>Deployment</h2>
-
-  <p>Containers: lightweight VMs </p>
-  <ul>
-    <li>12 factor app</li>
-    <li>easier deploy</li>
-    <li>reproducible build</li>
-  </ul>
-  <br>
-  <br>
-  <!-- <p class="fragment grow"> but ...</p> -->
-  <h4 class="fragment">but ... </h4>
+  <h1>Demo</h1>
+  <p>we are going to use <a href="https://www.openfaas.com/">OpenFaas</a></p>
 </section>
+<section>
+  <h2>but how does it work?</h2>
+  show watchdog
+  show deploy with terraform
+
+  test the code or test the deployment ?
+  create a new :
+  - go routing
+  - process
+  - container
+  - vm
+
+  resource optimization or development speed
+
+  who build a template project for microservices ?
+  who build a project generator for microservices ?
+  who is running all the latest version of all their lib
+
+  Semver --> link to rich hickey
+
+  Dependency management --> see go module https://github.com/jasonkeene/go-modules-demo https://github.com/myitcv/go-modules-by-example-submodules
+  monorepository
+  deployment
+
+  containers are an interface for dev to program to and for ops to run.
+  it is a declarative language
+
+
+  every problem can be solve by adding a layer of abstraction,
+  except the problem of having too many layers of abstraction
+
+  Nothing is a problem until it becomes one : cloud bills, performance, scaling
+
+  https://blog.cloudflare.com/serverless-performance-comparison-workers-lambda/
+</section>
+<section>
+  Simon Wardly - mapping
+  financial developers
+</section>
+<section>
+
+</section>
+<section>
+  Services that we use:
+  github
+  npm
+  docker
+fonts from google
+
+  Even though we could build it,
+  spending my time on the business makes more sense financially.
+
+
+  Service are limited
+
+  No maintenance  but services are out of your control sometimes
+
+  Dependency!
+
+  Promise theory
+  Chaos Engineering
+
+</section>
+
 <section>
 <ul>
 <li>Scaling up and down</li>
