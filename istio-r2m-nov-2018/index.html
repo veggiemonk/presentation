@@ -79,6 +79,7 @@
   <h2>APP</h2>
   <p class="fragment">and the app was code</p>
   <p class="fragment">that needed to scale</p>
+  <p class="fragment">👉  microservices</p>
 </section>
 
 <section>
@@ -110,29 +111,29 @@
 <p class="fragment">➡️ kubernetes <h4 class="fragment">but ... </h4></p>
 </section>
 <section>
-    <h3>8 fallacies of distributed computing</h3>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; font-size: smaller">
-    <ol>
-        <li  class="fragment highlight-blue">The network is reliable.</li>
-        <li>Latency is zero.</li>
-        <li>Bandwidth is infinite.</li>
-        <li>The network is secure.</li>
-    </ol>
-    <ol start="5">
-        <li>Topology doesn't change.</li>
-        <li>There is one administrator.</li>
-        <li>Transport cost is zero.</li>
-        <li>The network is homogeneous.</li>
-    </ol>
-    </div>
-    <br />
+  <h3>8 fallacies of distributed computing</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; font-size: smaller">
+  <ol>
+      <li  class="fragment highlight-blue">The network is reliable.</li>
+      <li>Latency is zero.</li>
+      <li>Bandwidth is infinite.</li>
+      <li>The network is secure.</li>
+  </ol>
+  <ol start="5">
+      <li>Topology doesn't change.</li>
+      <li>There is one administrator.</li>
+      <li>Transport cost is zero.</li>
+      <li>The network is homogeneous.</li>
+  </ol>
+  </div>
+  <br />
 
-    <span >
-      <a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">source (wikipedia)</a>
-      <br />
-      <a href="https://tools.ietf.org/html/rfc1925">RFC 1925 - 22 years old and still relevant</a>
-    </span>
-  </section>
+  <span >
+    <a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">source (wikipedia)</a>
+    <br />
+    <a href="https://tools.ietf.org/html/rfc1925">RFC 1925 - 22 years old and still relevant</a>
+  </span>
+</section>
 <section>
   <ul>
       <li>Logging</li>
@@ -165,6 +166,26 @@
   <br>
   <h4 class="fragment">➡️ ️ move it to the infrastructure</h4>
 </section>
+
+<section id="envoyproxy">
+  <h3>Data plane</h3>
+  <img width="50%" src="envoyproxy.png" alt="envoy proxy">
+  <blockquote style="width: 100%">
+    The network should be transparent to applications.
+    <br>
+    When network and application problems do occur it should be easy to determine the source of the problem.
+    </blockquote>
+  <h4>demo</h4>
+</section>
+
+<section id="arch1">
+  <!-- <h4>How does it solve inter service communication</h4> -->
+  <img style="height: 50vh;filter: invert(.9) brightness(1.4);"
+  alt="The overall architecture of an Istio-based application."
+  src="https://istio.io/docs/concepts/what-is-istio/arch.svg" title="Istio Architecture">
+  <h4 class="fragment" >How to manage a fleet of envoy proxy?</h4>
+</section>
+
 <section>
   <h2>Service Mesh</h2>
   <div style="display: grid; grid-template-columns: repeat(4, 1fr)">
@@ -191,10 +212,6 @@
   <p ><a href="https://www.youtube.com/watch?v=WnmzEM52_tQ">VIDEO: Istio a la carte by Dan Ciruli</a></p>
 </section>
 
-
-<!--
-  *******************************************************************************************
--->
 <section data-transition='concave'>
   <h4>What is a service mesh</h4>
   <h3>What problems does it solve</h3>
@@ -204,22 +221,12 @@
   <p class="fragment" style="font-style: italic">A network for services, not bytes</p>
 </section>
 
-<section id="arch">
+
+<section id="arch2">
   <h4>How does it solve inter service communication</h4>
   <img style="height: 60vh;filter: invert(.9) brightness(1.4);"
   alt="The overall architecture of an Istio-based application."
   src="https://istio.io/docs/concepts/what-is-istio/arch.svg" title="Istio Architecture">
-</section>
-
-<section id="envoyproxy">
-  <h3>Data plane</h3>
-  <img width="50%" src="envoyproxy.png" alt="envoy proxy">
-  <blockquote style="width: 100%">
-    The network should be transparent to applications.
-    <br>
-    When network and application problems do occur it should be easy to determine the source of the problem.
-    </blockquote>
-  <h4>demo</h4>
 </section>
 
 <section id="osi-layers">
@@ -233,7 +240,7 @@
   <img style="height: 50vh;filter: invert(.9) brightness(1.4);"
    src="https://istio.io/docs/concepts/traffic-management/PilotAdapters.svg"
    alt="pilot arch">
-   <p>How to manage a fleet of envoy proxy?</p>
+   <!-- <p>How to manage a fleet of envoy proxy?</p> -->
 </section>
 
 <section>
