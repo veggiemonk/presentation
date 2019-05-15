@@ -48,7 +48,7 @@
         </section>
         <section data-transition="zoom">
           <h4>Julien Bisconti</h4>
-          <p>Software engineer / DevOps / GDE</p>
+          <p>Software engineer / SRE / GDE</p>
           <div>
             <h4>Worked at</h4>
             <div style="display: grid; grid-template-columns: 1fr 1fr;">
@@ -219,24 +219,24 @@
         <section>
           <img src="string.png" alt="string perf tweet" />
           <img
-            src="https://pbs.twimg.com/media/D0baZ2MX0AADAt4.jpg:large"
+            src="string_perf.jpg"
             alt="string perf"
+            width="80%"
           />
         </section>
         <section>
           <h2>Monitoring</h2>
         </section>
         <section>
-          <h3>From user to metrics</h3>
           <ul>
-            <li>Application errors 👉 where to look 👀</li>
+            <li>Application errors 👉 where to look </li>
             <li>Business metrics 👉 money</li>
             <li>Latency 👉 user experience</li>
           </ul>
         </section>
-        <section>
+        <!-- <section>
           <img src="metrics.gif" alt="funny cartoon" />
-        </section>
+        </section> -->
         <section>
           <h3>Metrics, Metrics everywhere</h3>
           <iframe
@@ -297,7 +297,7 @@
           <h3>Ops 👉 outside container (run)</h3>
           <br />
           <br />
-          <h2 class="fragment">container = common interface</h2>
+          <h2 class="fragment">container = common interface for deploying services</h2>
         </section>
         <section>
           <h2>cAdvisor</h2>
@@ -453,21 +453,22 @@ docker run \
         </section>
         <section>
           <h3>which logs</h3>
-          <img src="app.png" alt="typical app" />
+          <img src="microservice-diagram.png" alt="typical app" style="background-color:dimgrey; padding:20px"/>
         </section>
         <section>
           <h2>tips</h2>
           <ul>
-            <li>logs don't replace tests</li>
-            <li>"error" means someone should investigate</li>
+            <li>logs don't replace tests or monitoring</li>
+            <li>❌"error" means someone should investigate</li>
             <li>maybe no need to log everything (GDPR?)</li>
             <li>business metrics to the queue</li>
             <li>
-              <a href="https://github.com/kubernetes/kubernetes/pull/67573"
-                >`kubectl logs --all-container` PR</a
+              <a href="https://github.com/wercker/stern"
+                >github.com/wercker/stern: logs multiple containers in parallel</a
               >
             </li>
-            <li><code>/dev/termination-log</code></li>
+            <li><code>/dev/termination-log</code> 👉 can be specified in YAML</li>
+            <li><a href="https://vimeo.com/245778144/4d1d597c5e">Kubernetes deconstructed (Vimeo)</a></li>
           </ul>
         </section>
         <section>
@@ -493,6 +494,53 @@ docker run \
           </ul>
         </section>
         <section>
+            <h2>different levels of monitoring</h2>
+            <ul>
+              <li>Infrastructure level - <span style="color: #eee8d5; font-family: 'League Gothic', Impact, sans-serif; ">U.S.E</span></li>
+              <li>Application level - <span style="color: #eee8d5; font-family: 'League Gothic', Impact, sans-serif;">R.E.D</span></li>
+            </ul>
+        </section>
+        <section>
+          <div style="display:grid; grid-template-columns: 1fr 1fr">
+          <div>
+            <span style="color: #eee8d5;">USE method: for every resource, check:</span>
+            <ul>
+              <li>utilization</li>
+              <li>saturation</li>
+              <li>errors</li>
+            </ul>
+          </div>
+          <div>
+              <span style="color: #eee8d5;">RED method: for every service, check request:</span>            
+            <ul>
+              <li>rate</li>
+              <li>error rate</li>
+              <li>duration (distributions)</li>
+            </ul>
+            <span style="color: #eee8d5;">are withing SLO/A</span>            
+
+          </div>
+          </div>
+        </section>
+        <section>
+          <div style="display:grid; grid-template-columns: 1fr 1fr">
+            <img width="70%" src="sre.png" alt="Site Reliability Engineering book by Google">
+            <div>
+              <div style="color: #eee8d5; font-family: 'League Gothic', Impact, sans-serif; font-size: 150%">4 Golden Signals</div>
+              <br>
+              <ul>
+                  <li>Latency</li>
+                  <li>Traffic</li>
+                  <li>Errors</li>
+                  <li>Saturation</li>
+              </ul>
+              <br>
+              <br>
+               <a href="https://landing.google.com/sre/books/">landing.google.com/sre/books/</a> 
+              </div>
+          </div>
+        </section>
+        <section>
           <h2>What to monitor</h2>
           <ol class="fragment">
             <li>request time/rate (if it's fast, it works)</li>
@@ -501,14 +549,11 @@ docker run \
             <li>kubernetes internals (control plane, kubelet, ...)</li>
             <li>infrastructure (disk space, CPU, RAM, network,...)</li>
           </ol>
-          <blockquote class="fragment">
-            RED = Request rate, Error and Duration - by Tom Wilkie
-          </blockquote>
         </section>
         <section>
           <h2>Health check</h2>
           <p>what does "healthy" mean?</p>
-          <img src="app.png" alt="typical app" />
+          <img src="microservice-diagram.png" alt="typical app" />
         </section>
         <section>
           <h2>Where to monitor</h2>
@@ -531,6 +576,10 @@ docker run \
         </section>
         <section>
           <h1>Going further</h1>
+        </section>
+        <section>
+            <h2>K8s for dev</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ns0fHKuv7_Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </section>
         <section>
           <h2>Open data</h2>
