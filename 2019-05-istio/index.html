@@ -175,7 +175,7 @@
 
 <section id="arch1">
   <!-- <h4>How does it solve inter service communication</h4> -->
-  <img style="height: 50vh;filter: invert(.9) brightness(1.4);"
+  <img style="height: 40vh;filter: invert(.9) brightness(1.4);"
   alt="The overall architecture of an Istio-based application."
   src="https://istio.io/docs/concepts/what-is-istio/arch.svg" title="Istio Architecture">
   <h4 class="fragment" >How to manage a fleet of envoy proxy?</h4>
@@ -219,7 +219,7 @@
 
 <section id="arch2">
   <h4>How does it solve inter service communication</h4>
-  <img style="height: 60vh;filter: invert(.9) brightness(1.4);"
+  <img style="height: 40vh;filter: invert(.9) brightness(1.4);"
   alt="The overall architecture of an Istio-based application."
   src="https://istio.io/docs/concepts/what-is-istio/arch.svg" title="Istio Architecture">
 </section>
@@ -232,7 +232,7 @@
 
 <section id="pilot">
   <h3>Control plane</h3>
-  <img style="height: 50vh;filter: invert(.9) brightness(1.4);"
+  <img style="height: 40vh;filter: invert(.9) brightness(1.4);"
    src="https://istio.io/docs/concepts/traffic-management/PilotAdapters.svg"
    alt="pilot arch">
    <!-- <p>How to manage a fleet of envoy proxy?</p> -->
@@ -241,14 +241,13 @@
 <section>
   <h4>What's in the code</h4>
   <pre><code class="python hljs" style="word-wrap: break-word;" data-trim>
-servicesDomain = "" if (os.environ.get("SERVICES_DOMAIN") == None) else "." + os.environ.get("SERVICES_DOMAIN")
 details = {
-    "name" : "http://details{0}:9080".format(servicesDomain),
+    "name" : "http://details:9080",
     "endpoint" : "details",
     "children" : []
 }
 ratings = {
-    "name" : "http://ratings{0}:9080".format(servicesDomain),
+    "name" : "http://ratings:9080",
     "endpoint" : "ratings",
     "children" : []
 }
