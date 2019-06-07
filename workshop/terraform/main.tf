@@ -1,6 +1,6 @@
 provider "google" {
-  region  = "us-central1"
-  project = "default-project-160900"
+  region  = "${var.region}"
+  project = "${var.project_id}"
 }
 
 resource "random_id" "trainee" {
@@ -23,7 +23,7 @@ data "google_iam_policy" "trainee" {
     role = "roles/owner"
 
     members = [
-      "user:seth@sethvargo.com",
+      "user:${var.email_owner}",
     ]
   }
 
@@ -46,24 +46,14 @@ resource "google_project_services" "trainee" {
   count   = "${length(var.trainees)}"
   project = "${element(google_project.trainee.*.project_id, count.index)}"
 
-  services = [
-    "containerregistry.googleapis.com",
-    "pubsub.googleapis.com",
-    "deploymentmanager.googleapis.com",
-    "replicapool.googleapis.com",
-    "replicapoolupdater.googleapis.com",
-    "resourceviews.googleapis.com",
-    "compute-component.googleapis.com",
-    "container.googleapis.com",
-    "storage-api.googleapis.com",
-  ]
+  services = "${var.services}"
 }
 
 resource "google_compute_instance" "trainee" {
   count        = "${length(var.trainees)}"
   name         = "default"
   machine_type = "n1-standard-1"
-  zone         = "us-central1-a"
+  zone         = "europe-west1-b"
 
   can_ip_forward = true
 
