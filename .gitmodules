@@ -1,0 +1,6 @@
+[submodule "workshop/terraform/gke-network-policy-demo"]
+	path = workshop/terraform/gke-network-policy-demo
+	url = https://github.com/GoogleCloudPlatform/gke-network-policy-demo.git
+[submodule "workshop/terraform/gke-rbac-demo"]
+	path = workshop/terraform/gke-rbac-demo
+	url = https://github.com/GoogleCloudPlatform/gke-rbac-demo.git
