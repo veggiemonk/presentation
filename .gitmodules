@@ -4,3 +4,30 @@
 [submodule "workshop/terraform/gke-rbac-demo"]
 	path = workshop/terraform/gke-rbac-demo
 	url = https://github.com/GoogleCloudPlatform/gke-rbac-demo.git
+[submodule "workshop/terraform/gke-security-scenarios-demo"]
+	path = workshop/terraform/gke-security-scenarios-demo
+	url = https://github.com/GoogleCloudPlatform/gke-security-scenarios-demo
+[submodule "workshop/terraform/gke-istio-vpn-demo"]
+	path = workshop/terraform/gke-istio-vpn-demo
+	url = https://github.com/GoogleCloudPlatform/gke-istio-vpn-demo.git
+[submodule "workshop/terraform/gke-migration-to-containers"]
+	path = workshop/terraform/gke-migration-to-containers
+	url = https://github.com/GoogleCloudPlatform/gke-migration-to-containers.git
+[submodule "workshop/terraform/gke-rolling-updates-demo"]
+	path = workshop/terraform/gke-rolling-updates-demo
+	url = https://github.com/GoogleCloudPlatform/gke-rolling-updates-demo.git
+[submodule "workshop/terraform/gke-tracing-demo"]
+	path = workshop/terraform/gke-tracing-demo
+	url = https://github.com/GoogleCloudPlatform/gke-tracing-demo.git
+[submodule "workshop/terraform/gke-logging-sinks-demo"]
+	path = workshop/terraform/gke-logging-sinks-demo
+	url = https://github.com/GoogleCloudPlatform/gke-logging-sinks-demo.git
+[submodule "workshop/terraform/gke-vault-demo"]
+	path = workshop/terraform/gke-vault-demo
+	url = https://github.com/GoogleCloudPlatform/gke-vault-demo.git
+[submodule "workshop/terraform/gke-managed-certificates-demo"]
+	path = workshop/terraform/gke-managed-certificates-demo
+	url = https://github.com/GoogleCloudPlatform/gke-managed-certificates-demo.git
+[submodule "workshop/terraform/gke-networking-demos"]
+	path = workshop/terraform/gke-networking-demos
+	url = https://github.com/GoogleCloudPlatform/gke-networking-demos.git
