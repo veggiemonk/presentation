@@ -31,3 +31,9 @@
 [submodule "workshop/terraform/gke-networking-demos"]
 	path = workshop/terraform/gke-networking-demos
 	url = https://github.com/GoogleCloudPlatform/gke-networking-demos.git
+[submodule "workshop/terraform/infra-as-code-workshop"]
+	path = workshop/terraform/infra-as-code-workshop
+	url = https://github.com/sethvargo/infra-as-code-workshop
+[submodule "workshop/terraform/sethvargo-vault-on-gke"]
+	path = workshop/terraform/sethvargo-vault-on-gke
+	url = https://github.com/sethvargo/vault-on-gke
