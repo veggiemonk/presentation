@@ -51,15 +51,6 @@
 		src="https://cloud.google.com/_static/e4e95039f4/images/cloud/cloud-logo.svg"
 		class="devsite-site-logo" alt="Google Cloud">
 </section>
-<section>
-	<h2>Workshop</h2>
-	<ol>
-		<li>Infra-as-Code with Terraform</li>
-		<li>provider</li>
-		<li>Google Cloud Credentials</li>
-		<li> </li>
-	</ol>
-</section>
 <!-- 
 	--------------------------------------------------------------------------------------------- 
 -->
@@ -116,24 +107,30 @@ resource "google_project_services" "apis" {
 </code></pre>
 </section>
 <section data-transition="slide">
-	<pre><code class="hljs" style="word-wrap: break-word; max-height: none;" data-trim data-line-numbers>
+	<pre><code class="hljs" style="word-wrap: break-word; max-height: 70vh;" data-trim data-line-numbers>
 /*...*/
 resource "google_compute_instance" "vm" {
 	project      = "${google_project.demo.project_id}"
 	name         = "user-${var.user}-first-vm"
-	machine-type = "n1-standard-1"
+	machine-type = "f1-micro"
 	zone         = "europe-west1-b"
-
-	disk {
-		image = "debian-cloud/debian-8"
+  
+	boot_disk {
+	  initialize_params {
+		image = "debian-cloud/debian-9"
+	  }
 	}
-
+  
 	network_interface {
-		network = "default"
-
-		access_config {
-			# will generate an IP
-		}
+	  network = "default"
+  
+	  access_config {} # Ephemeral IP
+	}
+  
+	metadata_startup_script = "echo hi > /terraform_workshop.txt"
+  
+	service_account {
+	  scopes = ["https://www.googleapis.com/auth/cloud-platform"]
 	}
 
 	depends_on = ["google_project_services.apis"]
@@ -142,32 +139,42 @@ resource "google_compute_instance" "vm" {
 <a href="https://www.terraform.io/docs/providers/google/r/compute_instance.html">compute instance reference	</a>
 </section>
 <section>
-	# Install graphviz: 
+	<!-- # Install graphviz: 
 	# brew install graphviz # OSX
-	# sudo apt install graphviz # Ubuntu
-	terraform graph | dot -Tpng > tf_dep_graph.png
+	# sudo apt install graphviz # Ubuntu -->
+	<h2>graph dependency</h2>
+	<pre><code data-trim>terraform graph | dot -Tpng > tf_dep_graph.png</code></pre>
+
 </section>
-<section>
+<!-- <section>
 	#Set variables in *.tfvars 
 	#or use the CLI with  -var="myvar=xxx" 
-</section>
+</section> -->
+<!-- <section>
+	resource creation might fail.
+
+	TF might not have registered the half created resources in the state.
+	We will try to recreate them on the next "apply"
+	We get an error saying that the resources already exist. 
+	We might have to delete something manually from the console or import it if possible.
+</section> -->
 <section>
-	<a href="https://github.com/terraform-google-modules?type=source">github: terraform-google-modules</a>
+	<h2>Resources</h2>
+	<ul>
+		<li><a href="https://github.com/terraform-google-modules?type=source">github: terraform-google-modules</a></li>
+		<li><a href="https://www.oreilly.com/library/view/terraform-up-and/9781491977071/ch04.html">Chapter: Terraform modules</a></li>
+		<li><a href="https://github.com/shuaibiyy/awesome-terraform">Awesome Terraform</a></li>
+		<li><a href="https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c">Terraform vs config mgmt</a></li>
+	</ul>
 </section>
-<section>
-	<a href="https://www.oreilly.com/library/view/terraform-up-and/9781491977071/ch04.html">Chapter: Terraform modules</a>
 </section>
-<section>
+<!-- <section>
 		https://google.qwiklabs.com/focuses/1208?parent=catalog  #TODO : READ THIS FIRST!!!!!
 		https://google.qwiklabs.com/focuses/1204?parent=catalog # DEVELOP  A PROVIDER (ADVANCED)
 		https://www.openpolicyagent.org/docs/latest/terraform/ (OPA for terraform)
 		https://learn.hashicorp.com/terraform/development/running-terraform-in-automation
 		https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9
-</section>
-<section>
-		https://github.com/shuaibiyy/awesome-terraform
-		https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c
-</section>
+</section> -->
 </div>
 </div>
 
@@ -178,7 +185,7 @@ resource "google_compute_instance" "vm" {
 		// - https://github.com/hakimel/reveal.js#configuration
 		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
-			history: true,
+			hash: true,
 			dependencies: [
 				{ src: 'plugin/markdown/marked.js' },
 				{ src: 'plugin/markdown/markdown.js' },

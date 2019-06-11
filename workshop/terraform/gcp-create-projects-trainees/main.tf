@@ -52,20 +52,17 @@ resource "google_project_services" "trainee" {
 resource "google_compute_instance" "trainee" {
   count        = "${length(var.trainees)}"
   name         = "default"
-  machine_type = "n1-standard-1"
+  machine_type = "f1-micro"
   zone         = "europe-west1-b"
 
   can_ip_forward = true
 
   project = "${element(google_project_services.trainee.*.project, count.index)}"
 
-  disk {
-    image = "debian-cloud/debian-8"
-  }
-
-  disk {
-    type    = "local-ssd"
-    scratch = true
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
   }
 
   metadata {
@@ -75,6 +72,12 @@ resource "google_compute_instance" "trainee" {
   network_interface {
     network = "default"
 
-    access_config {}
+    access_config {} # Ephemeral IP
+  }
+
+  metadata_startup_script = "echo hi > /terraform_workshop.txt"
+
+  service_account {
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 }
