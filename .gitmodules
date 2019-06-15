@@ -52,3 +52,15 @@
 [submodule "workshop/terraform/terraform-google-static-assets"]
 	path = workshop/terraform/terraform-google-static-assets
 	url = https://github.com/gruntwork-io/terraform-google-static-assets
+[submodule "workshop/terraform/terraform-kubernetes-helm"]
+	path = workshop/terraform/terraform-kubernetes-helm
+	url = https://github.com/gruntwork-io/terraform-kubernetes-helm.git
+[submodule "workshop/terraform/terraform-google-vault"]
+	path = workshop/terraform/terraform-google-vault
+	url = https://github.com/hashicorp/terraform-google-vault.git
+[submodule "workshop/terraform/terragrunt-infrastructure-live-example"]
+	path = workshop/terraform/terragrunt-infrastructure-live-example
+	url = https://github.com/gruntwork-io/terragrunt-infrastructure-live-example.git
+[submodule "workshop/terraform/terragrunt-infrastructure-modules-example"]
+	path = workshop/terraform/terragrunt-infrastructure-modules-example
+	url = https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example.git
