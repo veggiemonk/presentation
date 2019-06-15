@@ -37,3 +37,18 @@
 [submodule "workshop/terraform/sethvargo-vault-on-gke"]
 	path = workshop/terraform/sethvargo-vault-on-gke
 	url = https://github.com/sethvargo/vault-on-gke
+[submodule "workshop/terraform/terraform-google-gke"]
+	path = workshop/terraform/terraform-google-gke
+	url = https://github.com/gruntwork-io/terraform-google-gke.git
+[submodule "workshop/terraform/terraform-google-load-balancer"]
+	path = workshop/terraform/terraform-google-load-balancer
+	url = https://github.com/gruntwork-io/terraform-google-load-balancer.git
+[submodule "workshop/terraform/terraform-google-network"]
+	path = workshop/terraform/terraform-google-network
+	url = https://github.com/gruntwork-io/terraform-google-network.git
+[submodule "workshop/terraform/terraform-google-sql"]
+	path = workshop/terraform/terraform-google-sql
+	url = https://github.com/gruntwork-io/terraform-google-sql
+[submodule "workshop/terraform/terraform-google-static-assets"]
+	path = workshop/terraform/terraform-google-static-assets
+	url = https://github.com/gruntwork-io/terraform-google-static-assets
