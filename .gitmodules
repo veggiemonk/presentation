@@ -88,3 +88,12 @@
 [submodule "workshop/istio/istio-workshop-christian-posta"]
 	path = workshop/istio/istio-workshop-christian-posta
 	url = https://github.com/christian-posta/istio-workshop.git
+[submodule "workshop/terraform/terraform-google-bucket"]
+	path = workshop/terraform/terraform-google-bucket
+	url = git@github.com:veggiemonk/terraform-google-bucket
+[submodule "workshop/terraform/terraform-google-project"]
+	path = workshop/terraform/terraform-google-project
+	url = git@github.com:veggiemonk/terraform-google-project
+[submodule "workshop/terraform/terraform-google-secrets"]
+	path = workshop/terraform/terraform-google-secrets
+	url = git@github.com:veggiemonk/terraform-google-secrets

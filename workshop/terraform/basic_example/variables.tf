@@ -1,5 +1,5 @@
 variable "project_id" {
-    default = "ID OF PROJECT"
+  default = "ID OF PROJECT"
 }
 
 variable "bucket_name" {

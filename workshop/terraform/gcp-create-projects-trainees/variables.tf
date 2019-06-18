@@ -93,18 +93,18 @@ variable "services" {
     # "cloudresourcemanager.googleapis.com",                   # Cloud Resource Manager API
     # "cloudscheduler.googleapis.com",                         # Cloud Scheduler API
     # "cloudsearch.googleapis.com",                            # Cloud Search API
-    "cloudshell.googleapis.com",         # Cloud Shell API
+    "cloudshell.googleapis.com", # Cloud Shell API
 
     # "cloudtasks.googleapis.com",                             # Cloud Tasks API
     # "cloudtrace.googleapis.com",                             # Stackdriver Trace API
     # "commentanalyzer.googleapis.com",                        # Perspective Comment Analyzer API
     # "composer.googleapis.com",                               # Cloud Composer API
-    "compute.googleapis.com",            # Compute Engine API
+    "compute.googleapis.com", # Compute Engine API
 
     # "contacts.googleapis.com",                               # Contacts API
     # "container.googleapis.com",                              # Kubernetes Engine API
     # "containeranalysis.googleapis.com",                      # Container Analysis API
-    "containerregistry.googleapis.com",  # Container Registry API
+    "containerregistry.googleapis.com", # Container Registry API
 
     # "containerscanning.googleapis.com",                      # Container Scanning API
     # "copresence.googleapis.com",                             # Nearby Messages API
@@ -189,7 +189,7 @@ variable "services" {
     # "monitoring.googleapis.com",                             # Stackdriver Monitoring API
     # "moviesanywhere.googleapis.com",                         # Play Movies Anywhere API
     # "orkut.googleapis.com",                                  # Orkut REST API
-    "oslogin.googleapis.com",                                # Cloud OS Login API
+    "oslogin.googleapis.com", # Cloud OS Login API
     # "pagespeedonline.googleapis.com",                        # PageSpeed Insights API
     # "partners-json.googleapis.com",                          # Google Partners API
     # "people.googleapis.com",                                 # People API
@@ -206,12 +206,12 @@ variable "services" {
     # "realtime.googleapis.com",                               # Realtime API
     # "redis.googleapis.com",                                  # Google Cloud Memorystore for Redis API
     # "remotebuildexecution.googleapis.com",                   # Remote Build Execution API
-    "replicapool.googleapis.com",        # Compute Engine Instance Group Manager API
+    "replicapool.googleapis.com", # Compute Engine Instance Group Manager API
 
     "replicapoolupdater.googleapis.com", # Compute Engine Instance Group Updater API
 
     # "reseller.googleapis.com",                               # Google Apps Reseller API
-    "resourceviews.googleapis.com",      # Compute Engine Instance Groups API
+    "resourceviews.googleapis.com", # Compute Engine Instance Groups API
 
     # "risc.googleapis.com",                                   # RISC API
     # "roads.googleapis.com",                                  # Roads API
@@ -240,9 +240,9 @@ variable "services" {
     # "sqladmin.googleapis.com",                               # Cloud SQL Admin API
     # "stackdriver.googleapis.com",                            # Stackdriver API
     # "static-maps-backend.googleapis.com",                    # Maps Static API
-    "storage-api.googleapis.com",        # Google Cloud Storage JSON API
+    "storage-api.googleapis.com", # Google Cloud Storage JSON API
 
-    "storage-component.googleapis.com",  # Cloud Storage
+    "storage-component.googleapis.com", # Cloud Storage
   ]
 
   # "storagetransfer.googleapis.com",                        # Storage Transfer API
