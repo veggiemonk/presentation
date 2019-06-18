@@ -64,3 +64,6 @@
 [submodule "workshop/terraform/terragrunt-infrastructure-modules-example"]
 	path = workshop/terraform/terragrunt-infrastructure-modules-example
 	url = https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example.git
+[submodule "workshop/terraform/gke-application-security-demo"]
+	path = workshop/terraform/gke-application-security-demo
+	url = https://github.com/GoogleCloudPlatform/gke-application-security-demo
