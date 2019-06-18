@@ -67,3 +67,24 @@
 [submodule "workshop/terraform/gke-application-security-demo"]
 	path = workshop/terraform/gke-application-security-demo
 	url = https://github.com/GoogleCloudPlatform/gke-application-security-demo
+[submodule "workshop/istio/istio-demo"]
+	path = workshop/istio/istio-demo
+	url = https://github.com/mantel-digio/istio-demo.git
+[submodule "workshop/istio/istio-gke"]
+	path = workshop/istio/istio-gke
+	url = https://github.com/stefanprodan/istio-gke.git
+[submodule "workshop/istio/istio-service-mesh-workshop"]
+	path = workshop/istio/istio-service-mesh-workshop
+	url = https://github.com/leecalcote/istio-service-mesh-workshop.git
+[submodule "workshop/istio/istio-workshop"]
+	path = workshop/istio/istio-workshop
+	url = https://github.com/christian-posta/istio-workshop.git
+[submodule "workshop/istio/istio-workshop-retroryan"]
+	path = workshop/istio/istio-workshop-retroryan
+	url = https://github.com/retroryan/istio-workshop.git
+[submodule "workshop/istio/Istio101"]
+	path = workshop/istio/Istio101
+	url = https://github.com/thesandlord/Istio101.git
+[submodule "workshop/istio/istio-workshop-christian-posta"]
+	path = workshop/istio/istio-workshop-christian-posta
+	url = https://github.com/christian-posta/istio-workshop.git
