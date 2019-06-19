@@ -1,3 +1,3 @@
-output "trainee" {
-  value = "${google_compute_instance.trainee.*.project}"
-}
+//output "trainee" {
+//  value = "${google_compute_instance.trainee.*.project}"
+//}
