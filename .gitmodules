@@ -97,3 +97,6 @@
 [submodule "workshop/terraform/terraform-google-secrets"]
 	path = workshop/terraform/terraform-google-secrets
 	url = git@github.com:veggiemonk/terraform-google-secrets
+[submodule "workshop/terraform/terraform-google-forseti"]
+	path = workshop/terraform/terraform-google-forseti
+	url = https://github.com/forseti-security/terraform-google-forseti.git
