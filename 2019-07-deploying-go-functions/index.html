@@ -191,6 +191,7 @@ CMD [ "fwatchdog" ]
       </section>
       <section>
         <h2>Consistency is key</h2>
+        <a href="http://collections.uakron.edu/utils/getdownloaditem/collection/p15960coll1/id/25524/filename/25525.pdf/mapsto/pdf">source</a>
         <img src="army_report_title.png" alt="Archives of the History of American Psychology, The Center for the
   History of Psychology, The University of Akron" srcset="" />
         <img src="army_report.png" alt="army report uniformity" srcset="" />
@@ -296,6 +297,8 @@ CMD [ "fwatchdog" ]
       </section>
       <section>
           <h2>Pipelines are software too</h2>
+
+          <h4>How to change the system</h4>
       </section>
       <section>
         <h2>⬅️  SHIFT LEFT</h2>
@@ -339,6 +342,46 @@ CMD [ "fwatchdog" ]
         https://cloud.google.com/functions/docs/quickstart#functions-prepare-environment-go -->
       </section>
       <section>
+        <h3>In the ☁️</h3>
+
+       
+        <pre><code data-trim>
+
+docker pull esimov/pigo-openfaas:0.1
+gcloud auth configure-docker
+export IMAGE="eu.gcr.io/${PROJECT_ID}/pigo-openfaas"
+docker tag esimov/pigo-openfaas:0.1 "${IMAGE}"
+docker push "${IMAGE}"
+
+gcloud beta run deploy pigo-openfaas --platform=managed \
+  --region=us-central1 --image="${IMAGE}" \
+  --allow-unauthenticated \
+  --set-env-vars=output_mode=image \
+  --set-env-vars=input_mode=url 
+export IMG_URL="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/NASA_Astronaut_Group_18.jpg/1200px-NASA_Astronaut_Group_18.jpg"
+curl -H 'Content-Type: binary/octet-stream' \ 
+  --data-binary "${IMG_URL}" \
+  "${FUNCTION_URL}" > target.jpg
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Resources</h2>
+        <ul>
+          <li>All references have links</li>
+          <small>
+
+          <li><a href="https://www.openfaas.com">https://www.openfaas.com</a></li>
+          <li><a href="https://www.openfaas.com/blog/golang-serverless/">https://www.openfaas.com/blog/golang-serverless/</a></li>
+          <li><a href="https://cloud.google.com/run/docs/reference/container-contract">https://cloud.google.com/run/docs/reference/container-contract</a></li>
+          <li><a href="https://codelabs.developers.google.com/codelabs/cloud-run-gke/index.html?index=..%2F..index#0">https://codelabs.developers.google.com/codelabs/cloud-run-gke/index.html?index=..%2F..index#0</a></li>
+          <li><a href="https://cloud.google.com/run/docs/">https://cloud.google.com/run/docs/</a></li>
+          <li><a href="https://www.azquotes.com/author/3969-Edsger_Dijkstra">https://www.azquotes.com/author/3969-Edsger_Dijkstra</a></li>
+          </small>
+
+        </ul>
+      </section>
+      <section>
         <h2>THANK YOU</h2>
         <br>
         <p>
@@ -358,6 +401,9 @@ CMD [ "fwatchdog" ]
               https://www.slideshare.net/julienbisconti</a>
           </small>
         </p>
+        <h4>free stuff</h4>
+        <a href="https://tinyurl.com/FreeK8SQuest ">tinyurl.com/FreeK8SQuest </a>
+
       </section>
     </div>
   </div>
