@@ -32,18 +32,15 @@
       </section>
 
       <section>
-        <h2>Why deploying go functions ?</h2>
-      </section>
-      <section>
         <h2>Demo</h2>
         <p>
           <a href="https://www.openfaas.com/">
-            <img width="50%" src="https://github.com/openfaas/media/blob/master/OpenFaaS_Magnet_3_1_png.png?raw=true"
+            <img width="50%" src="openfaas.png"
               alt="openfaas logo">
           </a>
         </p>
         <pre><code class="hljs bash" data-trim>
-git clone https://github.com/openfaas/faas
+git clone https://github.com/openfaas/faas-netes
 cd faas
 make start_kind
 </code></pre>
@@ -102,6 +99,7 @@ func Handle(req []byte) string {
       </section>
 
       <section>
+        <h4>Some container with your function? </h4>
         <pre><code class="hljs dockerfile" data-trim>
 # Populate example here - i.e. "cat", "sha512sum" or "node index.js"
 ENV fprocess="./handler"
@@ -121,7 +119,7 @@ CMD [ "fwatchdog" ]
           <li>Runs inside a container</li>
           <li>Uses a watchdog process (web server)</li>
           <li>Process STDIN and returns to STDOUT</li>
-          <li>Collects metrics in Prometheus</li>
+          <!-- <li>Collects metrics in Prometheus</li> -->
         </ul>
         <aside class="notes">						
             Each container has a watchdog process that hosts a web server allowing a post request
@@ -227,18 +225,20 @@ CMD [ "fwatchdog" ]
         <br>
         <h4 class="fragment">➡️ ️ make code part of infrastructure</h4>
       </section> -->
-      <section>
+
+
+      <!-- <section>
         <h2>demo</h2>
         <h4>service mesh: Linkerd</h4>
-        <a href="https://github.com/openfaas-incubator/openfaas-linkerd2">source</a>
+        <a href="https://github.com/openfaas-incubator/openfaas-linkerd2">linkerd.io</a>
+      </section> -->
+      <!-- ======================================================================= -->
+      <section>
+        <h2>Why deploying go functions ?</h2>
       </section>
       <section>
         <img src="/no-code.png" alt="no code" width="80%">
         <a target="_blank" href="https://github.com/kelseyhightower/nocode">repository</a>
-      </section>
-      <!-- ======================================================================= -->
-      <section>
-        <h2>Why deploying go functions ?</h2>
       </section>
       <section>
         <h1>Mindset</h1>
@@ -280,17 +280,17 @@ CMD [ "fwatchdog" ]
       </section>
 
       <section>
-        <img src="https://cdn-images-1.medium.com/max/1600/1*9UXhn8Ne74Ijfn931sjOPw.jpeg" alt="mapping">
+        <img src="swardley_map.jpeg" alt="mapping">
         <p><a href="https://youtu.be/xlNYYy8pzB4">Simon Wardly - Mapping</a></p>
       </section>
-
+<!-- 
       <section>
         <h2>CODE</h2>
         👇
         <h2>INFRA</h2>
         👇
         <H2>SERVICE</H2>
-      </section>
+      </section> -->
       <!-- ======================================================================= -->
       <section>
         <h2>Why deploying go functions ?</h2>
@@ -314,18 +314,18 @@ CMD [ "fwatchdog" ]
           <li>policy</li>
           <li>deployment</li>
           <li>pipeline</li>
-          <li class="fragment">resiliency ?</li>
+          <li>resiliency ?</li>
         </ul>
       </section>
       <section>
         <ul>
           <li>infra 👉 Terraform</li>
-          <li>config 👉 too many</li>
+          <li>config 👉 YAML (CUE ?)</li>
           <li>build 👉 Dockerfile</li>
           <li>policy 👉 O.P.A.</li>
-          <li>deployment 👉 Kubernetes</li>
-          <li>pipeline 👉 Jenkins</li>
-          <li class="fragment">resiliency  👉 ChaosToolkit</li>
+          <li>deployment 👉 YAML (Kubernetes)</li>
+          <li>pipeline 👉 Jenkins (Tekton ?)</li>
+          <li>resiliency  👉 ChaosToolkit</li>
         </ul>
 
 
@@ -346,7 +346,6 @@ CMD [ "fwatchdog" ]
 
        
         <pre><code data-trim>
-
 docker pull esimov/pigo-openfaas:0.1
 gcloud auth configure-docker
 export IMAGE="eu.gcr.io/${PROJECT_ID}/pigo-openfaas"
@@ -358,31 +357,34 @@ gcloud beta run deploy pigo-openfaas --platform=managed \
   --allow-unauthenticated \
   --set-env-vars=output_mode=image \
   --set-env-vars=input_mode=url 
+export FUNCTION_URL="..."
 export IMG_URL="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/NASA_Astronaut_Group_18.jpg/1200px-NASA_Astronaut_Group_18.jpg"
-curl -H 'Content-Type: binary/octet-stream' \ 
-  --data-binary "${IMG_URL}" \
-  "${FUNCTION_URL}" > target.jpg
+curl -H 'Content-Type: binary/octet-stream' \
+  --data-binary "${IMG_URL}" "${FUNCTION_URL}" > target.jpg
         </code></pre>
       </section>
 
       <section>
         <h2>Resources</h2>
         <ul>
-          <li>All references have links</li>
+          <!-- <li>All references have links</li> -->
           <small>
-
-          <li><a href="https://www.openfaas.com">https://www.openfaas.com</a></li>
-          <li><a href="https://www.openfaas.com/blog/golang-serverless/">https://www.openfaas.com/blog/golang-serverless/</a></li>
-          <li><a href="https://cloud.google.com/run/docs/reference/container-contract">https://cloud.google.com/run/docs/reference/container-contract</a></li>
-          <li><a href="https://codelabs.developers.google.com/codelabs/cloud-run-gke/index.html?index=..%2F..index#0">https://codelabs.developers.google.com/codelabs/cloud-run-gke/index.html?index=..%2F..index#0</a></li>
-          <li><a href="https://cloud.google.com/run/docs/">https://cloud.google.com/run/docs/</a></li>
-          <li><a href="https://www.azquotes.com/author/3969-Edsger_Dijkstra">https://www.azquotes.com/author/3969-Edsger_Dijkstra</a></li>
+          <li><a href="https://www.openfaas.com">openfaas.com</a></li>
+          <li><a href="https://linkerd.io/">linkerd.io</a></li>
+          <li><a href="https://www.openfaas.com/blog/golang-serverless/">openfaas.com/blog/golang-serverless</a></li>
+          <li><a href="https://cloud.google.com/run/docs/reference/container-contract">cloud.google.com/run/docs/reference/container-contract</a></li>
+          <li><a href="https://codelabs.developers.google.com/codelabs/cloud-run-gke/index.html?index=..%2F..index#0">cloud-run-gke - codelabs</a></li>
+          <li><a href="https://cloud.google.com/run/docs/">Cloud Run Docs</a></li>
+          <li><a href="https://www.azquotes.com/author/3969-Edsger_Dijkstra">Dijkstra Quotes</a></li>
           </small>
-
         </ul>
+        <h4>free stuff</h4>
+        <a href="https://tinyurl.com/FreeK8SQuest">tinyurl.com/FreeK8SQuest </a>
+
       </section>
       <section>
-        <h2>THANK YOU</h2>
+        <h2>I'm sorry 🙏 </h2>
+        <h4>If you had to maintain my code</h4>
         <br>
         <p>
           <small>
@@ -401,9 +403,6 @@ curl -H 'Content-Type: binary/octet-stream' \
               https://www.slideshare.net/julienbisconti</a>
           </small>
         </p>
-        <h4>free stuff</h4>
-        <a href="https://tinyurl.com/FreeK8SQuest">tinyurl.com/FreeK8SQuest </a>
-
       </section>
     </div>
   </div>
