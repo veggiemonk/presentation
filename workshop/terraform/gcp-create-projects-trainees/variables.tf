@@ -8,9 +8,6 @@ variable "region" {
   default = "europe-west1"
 }
 
-variable "project_id" {
-}
-
 variable "email_owner" {
   default = "trainer@gmail.com"
 }

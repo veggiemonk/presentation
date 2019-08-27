@@ -3,7 +3,8 @@ terraform {
 }
 
 provider "google" {
-  region = var.region
+  version = "~> 2.9.0"
+  region  = var.region
 }
 
 resource "random_id" "trainee" {
