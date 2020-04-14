@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/moon.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? 'css/print/pdf.css'
+        : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>SERVERLESS</h1>
+          <h4>&</h4>
+          <h1>FaaS</h1>
+        </section>
+        <section></section>
+        <section>
+          <h2>I'm sorry 🙏</h2>
+          <h4>If you had to maintain my code</h4>
+          <h4>I hope you learned more by maintaining it</h4>
+          <h4>than me by writing it</h4>
+          <br />
+          <p>
+            <small>
+              <a
+                style="font-weight: bold; color: deepskyblue;"
+                href="http://github.com/veggiemonk"
+                >Github: @veggiemonk</a
+              >
+              <br />
+              <a
+                style="font-weight: bold; color: deepskyblue;"
+                href="https://twitter.com/veggiemonk"
+                >Twitter: @veggiemonk</a
+              >
+              <br />
+              <a
+                style="font-weight: bold; color: deepskyblue;"
+                href="https://www.linkedin.com/in/julienbisconti/"
+                >LinkedIn: julienbisconti</a
+              >
+              <br />
+              <a
+                style="font-weight: bold; color: deepskyblue;"
+                href="https://veggiemonk.github.io/"
+                >blog: https://veggiemonk.github.io/</a
+              >
+              <br />
+              <a
+                style="font-weight: bold; color: deepskyblue;"
+                href="https://www.slideshare.net/julienbisconti"
+                >slides: https://www.slideshare.net/julienbisconti</a
+              >
+            </small>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/highlight/highlight.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+        ],
+      });
+    </script>
+  </body>
+</html>
